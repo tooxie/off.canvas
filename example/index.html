@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html class="no-js">
-    <head> 
+    <head>
         <title>Off Canvas</title>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-		
+
 		<meta name="description" content="HTML, CSS and jQuery plugin to create an off canvas layout for web apps or websites" />
 		<meta name="keywords" content="off canvas, offcanvas, app, webapp, web app" />
-		
+
 		<link rel="stylesheet" href="css/offcanvas.css" />
 		<link rel="icon" type="image/x-icon" href="favicon.ico" />
-		
+
 		<script src="js/modernizr.js"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 		<script src="../src/jquery.offcanvas.min.js"></script>
@@ -21,19 +21,19 @@
 				});
 			});
 		</script>
-		
-		<!-- If browser is internet explorer run HTML5 compatibility code -->		
+
+		<!-- If browser is internet explorer run HTML5 compatibility code -->
 		<!--[if IE]>
-		    <script src="js/html5.js"></script>  
+		    <script src="js/html5.js"></script>
 		<![endif]-->
 	</head>
 	<body>
 		<aside id="sidebarLeft" class="sidebarLeft">
 			<div class="scrollableArea">
 				<!-- Place whatever HTML you want in here -->
-				
+
 				<a class="shutLeft" href="">&#10006;</a>
-				
+
 				<div class="you padded">
 					<a href="http://aidanzealley.com/" target="_blank"><img class="avatar" src="pictures/aidan.jpg" alt="Aidan Zealley" width="50"/></a>
 					<h2><a href="http://aidanzealley.com/" target="_blank">Aidan Zealley</a></h2>
@@ -48,7 +48,7 @@
 				</ul>
 			</div>
 		</aside>
-		
+
 		<section id="page" class="page">
 			<header class="topBar">
 				<a id="leftBurger" class="slideRight" href="">&#9776;</a>
@@ -57,33 +57,33 @@
 			</header>
 			<div class="scrollableArea">
 				<!-- Place whatever HTML you want in here -->
-				
+
 				<div class="cover floated padded">
 					<hgroup class="heading padded">
 						<h2>Presenting</h2>
 						<h1><span class="pacifico">Off.canvas</span> , for your web application</h1>
 					</hgroup>
 				</div>
-				
+
 				<div class="floated padded">
 					<div class="thin">
 						<h1 class="center">What the funk is it?!</h1>
 						<p>It's an HTML, CSS and jQuery plugin to kick off your web applications with the 'Off Canvas' style sidebar we know and love from native mobile apps.</p>
 						<hr/>
-						
+
 						<h1 class="center">How do I use it?!</h1>
 						<p>The Off.canvas jQuery plugin operates on the html tag of your page so in its most basic form you include jQuery and the Off.canvas plugin and CSS files and then run it with:</p>
 						<pre><code>
 $('html').offcanvas();
 						</code></pre>
 						<p>This will create an off canvas layout with the default settings providing you supply the following html structure:</p>
-						
+
 <pre><code>&lt;aside id=&quot;sidebarLeft&quot; class=&quot;sidebarLeft&quot;&gt;
 
   &lt;div class=&quot;scrollableArea&quot;&gt;
     &lt;!-- Place whatever HTML you want in here --&gt;
   &lt;/div&gt;
-  
+
 &lt;/aside&gt;
 
 &lt;section id=&quot;page&quot; class=&quot;page&quot;&gt;
@@ -91,16 +91,16 @@ $('html').offcanvas();
   &lt;header class=&quot;topBar&quot;&gt;
     &lt;a id=&quot;leftBurger&quot; class=&quot;slideRight&quot; href=&quot;&quot;&gt;&amp;#9776;&lt;/a&gt;
   &lt;/header&gt;
-  
+
   &lt;div class=&quot;scrollableArea&quot;&gt;
     &lt;!-- Place whatever HTML you want in here --&gt;
   &lt;/div&gt;
-  
+
 &lt;/section&gt;</code></pre>
 						<p>The scrollableArea divs are there to make the content scrollable as the overflow of the page is hidden to allow the off canvas effect to work. I chose not to make the side bar or main page scrollable directly so as to allow for more flexible layout options, such as adding a fixed position top bar like on this page.</p>
 						<p>The jQuery targets the ids of the side bar and main page, whilst the class names are used by the CSS.</p>
 						<hr/>
-						
+
 						<h3>Still Confused? Try these things...</h3>
 						<ul class="demo">
 							<li>
@@ -119,9 +119,9 @@ $('html').offcanvas();
 						<hr/>
 						<h3>Still Confused, or just want to trigger it for the lulz? Try clicking this button...</h3>
 						<a class="button huge slideRight" href="">Click meh!!</a>
-						
+
 						<hr/>
-						
+
 						<h1 class="center">Ok so now you want it, right?</h1>
 						<br/>
 						<p class="center">It's still a WIP, but you can <a href="https://github.com/AidanZealley/off.canvas" target="_blank">download the source</a> on GitHub :)</p>
@@ -129,13 +129,13 @@ $('html').offcanvas();
 				</div>
 			</div>
 		</section>
-		
+
 		<aside id="sidebarRight" class="sidebarRight">
 			<div class="scrollableArea">
 				<!-- Place whatever HTML you want in here -->
-				
+
 				<a class="shutRight" href="">&#10006;</a>
-				
+
 				<div class="you padded">
 					<a href="http://aidanzealley.com/" target="_blank"><img class="avatar" src="pictures/aidan.jpg" alt="Aidan Zealley" width="50"/></a>
 					<h2><a href="http://aidanzealley.com/" target="_blank">Aidan Zealley</a></h2>
