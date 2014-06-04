@@ -13,12 +13,27 @@
 
         <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script src="../src/jquery.offcanvas.min.js"></script>
+        <script src="../src/jquery.offcanvas.js"></script>
         <script>
             jQuery(document).ready(function($) {
                 $('html').offcanvas({
-                    hasSidebarLeft: true,
-                    hasSidebarRight: true
+                    sidebarLeft: '#sidebarLeft'
+                });
+
+                $('#sidebarLeft').on('open', function() {
+                    console.log('-- left: open');
+                });
+
+                $('#sidebarLeft').on('close', function() {
+                    console.log('-- left: close');
+                });
+
+                $('#sidebarRight').on('open', function() {
+                    console.log('-- right: open');
+                });
+
+                $('#sidebarRight').on('close', function() {
+                    console.log('-- right: close');
                 });
             });
         </script>
