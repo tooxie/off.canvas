@@ -11,11 +11,11 @@
 
         // Default element names
         var sections = $.extend({
-            sidebarLeft: '#sidebarLeft',
-            sidebarRight: '#sidebarRight',
-            mainPage: '#page',
-            leftBurger: '#leftBurger',
-            rightBurger: '#rightBurger'
+            sidebarLeft: '',
+            sidebarRight: '',
+            mainPage: '',
+            leftBurger: '',
+            rightBurger: ''
         }, options);
 
         var rSidebar = $(sections.sidebarRight);
