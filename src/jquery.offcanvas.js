@@ -6,7 +6,8 @@
             animated: true,
             oldPhones: true,
             enableTouch: true,
-            enableKeys: true
+            enableKeys: true,
+            activeClass: 'offcanvas-active'
         }, options);
 
         // Default element names
@@ -68,7 +69,7 @@
                     if (rSidebar.hasClass('show')) {
                         rSidebar.removeClass('show');
                     }
-                    $('html').addClass('active');
+                    $('html').addClass(settings.activeClass);
                     mainPage.addClass('slidRight');
                     lBurger.addClass('pressed');
 
@@ -83,7 +84,7 @@
                     if (lSidebar.hasClass('show')) {
                         lSidebar.removeClass('show');
                     }
-                    $('html').addClass('active');
+                    $('html').addClass(settings.activeClass);
                     mainPage.addClass('slidLeft');
                     rBurger.addClass('pressed');
 
@@ -103,7 +104,7 @@
                     }, 300);
                     window.clearTimeout(timeout);
 
-                    $('html').removeClass('active');
+                    $('html').removeClass(settings.activeClass);
                     slidRight = 0;
                     break;
 
@@ -120,7 +121,7 @@
                     }, 300);
                     window.clearTimeout(timeout);
 
-                    $('html').removeClass('active');
+                    $('html').removeClass(settings.activeClass);
                     slidLeft = 0;
                     break;
                 }
