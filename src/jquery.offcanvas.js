@@ -68,6 +68,7 @@
                     if (rSidebar.hasClass('show')) {
                         rSidebar.removeClass('show');
                     }
+                    $('html').addClass('active');
                     mainPage.addClass('slidRight');
                     lBurger.addClass('pressed');
 
@@ -82,6 +83,7 @@
                     if (lSidebar.hasClass('show')) {
                         lSidebar.removeClass('show');
                     }
+                    $('html').addClass('active');
                     mainPage.addClass('slidLeft');
                     rBurger.addClass('pressed');
 
@@ -101,6 +103,7 @@
                     }, 300);
                     window.clearTimeout(timeout);
 
+                    $('html').removeClass('active');
                     slidRight = 0;
                     break;
 
@@ -117,6 +120,7 @@
                     }, 300);
                     window.clearTimeout(timeout);
 
+                    $('html').removeClass('active');
                     slidLeft = 0;
                     break;
                 }
