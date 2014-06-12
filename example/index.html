@@ -16,8 +16,9 @@
         <script src="../src/jquery.offcanvas.js"></script>
         <script>
             jQuery(document).ready(function($) {
-                $('html').offcanvas({
-                    sidebarLeft: '#sidebarLeft'
+                $('#page').offcanvas({
+                    sidebarLeft: '#sidebarLeft',
+                    mainPage: '#page'
                 });
 
                 $('#sidebarLeft').on('open', function() {

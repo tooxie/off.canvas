@@ -19,38 +19,126 @@
             rightBurger: ''
         }, options);
 
-        var rSidebar = $(sections.sidebarRight);
-        var lSidebar = $(sections.sidebarLeft);
+        if (sections.sidebarRight !== '') {
+            var rSidebar = $(sections.sidebarRight);
+            var hasSidebarRight = true;
+        }
+        if (sections.sidebarLeft !== '') {
+            var lSidebar = $(sections.sidebarLeft);
+            var hasSidebarLeft = true;
+        }
         var mainPage = $(sections.mainPage);
         var lBurger = $(sections.leftBurger);
         var rBurger = $(sections.rightBurger);
+        var $html = $('html');
 
-        var hasSidebarLeft = lSidebar.length > 0;
-        var hasSidebarRight = rSidebar.length > 0;
+        var slideRight = function slideRight() {
+        }
+
+        console.log(this);
+        /* TODO
+         * On right press:
+         *   > Slide right.
+         * On left press:
+         *   > Slide left.
+         * Have events triggered on the page:
+         *   > Open/close left sidebar
+         *   > Open/close right sidebar
+         * Check if there is anything to be done:
+         *   > Open event: Is the OC already open? Then do nothing.
+         *   > Close event: Is the OC closed? Do nothing.
+         */
 
         return this.each(function () {
-
             // Add offcanvas class for setting layout specific css
-            $(this).addClass('offcanvas');
+            $html.addClass('offcanvas');
 
-            $.each(sections, function (index, element) {
-                // Add animation class if option is enabled
-                if (settings.animated) {
-                    $(element).addClass('animatedSlide');
+            // Events
+            mainPage.on('slideLeft', function slideLeft(ev) {
+                if ($html.hasClass(settings.activeClass)) {
+                    console.log('-- left::close');
+                    // Close the left sidebar
+                    if (hasSidebarLeft && lSidebar.hasClass('visible')) {
+                        $html.removeClass(settings.activeClass);
+                        lSidebar.removeClass('visible');
+                        emit(lSidebar, 'close');
+                    }
+                } else {
+                    console.log('-- right::open');
+                    // Open the right sidebar
+                    if (hasSidebarRight && !rSidebar.hasClass('visible')) {
+                        $html.addClass(settings.activeClass);
+                        rSidebar.addClass('visible');
+                        emit(rSidebar, 'open');
+                    }
                 }
             });
+
+            mainPage.on('slideRight', function slideRight(ev) {
+                if ($html.hasClass(settings.activeClass)) {
+                    console.log('-- right::close');
+                    // Close the right sidebar
+                    if (hasSidebarRight && rSidebar.hasClass('visible')) {
+                        $html.removeClass(settings.activeClass);
+                        rSidebar.removeClass('visible');
+                        emit(rSidebar, 'close');
+                    }
+                } else {
+                    console.log('-- left::open');
+                    // Open the left sidebar
+                    if (hasSidebarRight && !lSidebar.hasClass('visible')) {
+                        $html.addClass(settings.activeClass);
+                        lSidebar.addClass('visible');
+                        emit(lSidebar, 'open');
+                    }
+                }
+            });
+
+            if (settings.animated) {
+                if (hasSidebarLeft) {
+                    lSidebar.addClass('animatedSlide');
+                }
+                if (hasSidebarRight) {
+                    rSidebar.addClass('animatedSlide');
+                }
+            }
+
+            if (hasSidebarLeft) {
+                $('.slideRight').on('click', function (event) {
+                    if ($html.hasClass(settings.activeClass)) {
+                        mainPage.trigger('slideLeft');
+                    } else {
+                        mainPage.trigger('slideRight');
+                    }
+
+                    return false;
+                });
+                $('.shutLeft').on('click', function (event) {
+                    mainPage.trigger('slideLeft');
+                    return false;
+                });
+            }
+
+            if (hasSidebarRight) {
+                $('.slideLeft').on('click', function (event) {
+                    if ($html.hasClass(settings.activeClass)) {
+                        mainPage.trigger('slideRight');
+                    } else {
+                        mainPage.trigger('slideLeft');
+                    }
+
+                    return false;
+                });
+                $('.shutRight').on('click', function (event) {
+                    mainPage.trigger('slideRight');
+                    return false;
+                });
+            }
 
             // Add overthrow polyfill if option is enabled
             if (settings.oldPhones) {
                 $('.scrollableArea').addClass('overthrow');
             }
-
-            var slidRight = 0;
-            var slidLeft = 0;
-
-            var timeout = window.setTimeout(function (sidebar) {
-                $(sidebar).removeClass('show');
-            }, 400);
 
             function emit(element, eventName) {
                 window.setTimeout(function() {
@@ -58,130 +146,19 @@
                 }, 1);
             }
 
-            // Function that performs the sliding by adding classes to the relevant elements
-            function slide(direction, settings) {
-                switch (direction) {
-                case 'right':
-                    if (!lSidebar.hasClass('show')) {
-                        emit(lSidebar, 'open');
-                        lSidebar.addClass('slidRight show');
-                    }
-                    if (rSidebar.hasClass('show')) {
-                        rSidebar.removeClass('show');
-                    }
-                    $('html').addClass(settings.activeClass);
-                    mainPage.addClass('slidRight');
-                    lBurger.addClass('pressed');
-
-                    slidRight = 1;
-                    return
-
-                case 'left':
-                    if (!rSidebar.hasClass('show')) {
-                        emit(rSidebar, 'open');
-                        rSidebar.addClass('slidLeft show');
-                    }
-                    if (lSidebar.hasClass('show')) {
-                        lSidebar.removeClass('show');
-                    }
-                    $('html').addClass(settings.activeClass);
-                    mainPage.addClass('slidLeft');
-                    rBurger.addClass('pressed');
-
-                    slidLeft = 1;
-                    break;
-
-                case 'shutLeft':
-                    if (lSidebar.hasClass('slidRight')) {
-                        emit(lSidebar, 'close');
-                        lSidebar.removeClass('slidRight');
-                    }
-                    lBurger.removeClass('pressed');
-                    mainPage.removeClass('slidRight');
-
-                    var timeout = window.setTimeout(function () {
-                        lSidebar.removeClass('show');
-                    }, 300);
-                    window.clearTimeout(timeout);
-
-                    $('html').removeClass(settings.activeClass);
-                    slidRight = 0;
-                    break;
-
-                case 'shutRight':
-                    if (rSidebar.hasClass('slidLeft')) {
-                        emit(rSidebar, 'close');
-                        rSidebar.removeClass('slidLeft');
-                    }
-                    rBurger.removeClass('pressed');
-                    mainPage.removeClass('slidLeft');
-
-                    var timeout = window.setTimeout(function () {
-                        $(rSidebar).removeClass('show');
-                    }, 300);
-                    window.clearTimeout(timeout);
-
-                    $('html').removeClass(settings.activeClass);
-                    slidLeft = 0;
-                    break;
-                }
-            }
-
-            if (hasSidebarLeft) {
-                $('.slideRight').on('click', function (event) {
-                    if (!slidRight) {
-                        slide('right');
-                    } else {
-                        slide('shutLeft');
-                    }
-
-                    return false;
-                });
-            }
-            if (hasSidebarRight) {
-                $('.slideLeft').on('click', function (event) {
-                    if (!slidLeft) {
-                        slide('left');
-                    } else {
-                        slide('shutRight');
-                    }
-
-                    return false;
-                });
-            }
-            if (hasSidebarLeft) {
-                $('.shutLeft').on('click', function (event) {
-                    slide('shutLeft');
-
-                    return false;
-                });
-            }
-            if (hasSidebarRight) {
-                $('.shutRight').on('click', function (event) {
-                    slide('shutRight');
-
-                    return false;
-                });
-            }
-
             if (settings.enableKeys) {
-                $(this).keydown(function (e) {
-                    if (e.keyCode === 39) {
-                        if (!slidRight && !slidLeft && hasSidebarLeft) {
-                            slide('right');
-                        } else {
-                            slide('shutRight');
-                        }
+                var LEFT = 37;
+                var RIGHT = 39;
+
+                $html.keydown(function (e) {
+                    if (e.keyCode === RIGHT) {
+                        mainPage.trigger('slideRight');
 
                         return false;
                     }
 
-                    if (e.keyCode === 37) {
-                        if (!slidRight && !slidLeft && hasSidebarRight) {
-                            slide('left');
-                        } else {
-                            slide('shutLeft');
-                        }
+                    if (e.keyCode === LEFT) {
+                        mainPage.trigger('slideLeft');
 
                         return false;
                     }
@@ -189,26 +166,16 @@
             }
 
             if (settings.enableTouch) {
-                $(this).hammer({
+                $html.hammer({
                     drag: false,
                     prevent_default: false,
                     css_hacks: false
                 }).on('swipe', function (event) {
                     if (event.direction === 'right') {
-                        if (!slidRight && !slidLeft && hasSidebarLeft) {
-                            slide('right');
-                        } else {
-                            slide('shutRight');
-                        }
-
+                        mainPage.trigger('slideRight');
                         return false;
                     } else if (event.direction === 'left') {
-                        if (!slidRight && !slidLeft && hasSidebarRight) {
-                            slide('left');
-                        } else {
-                            slide('shutLeft');
-                        }
-
+                        mainPage.trigger('slideLeft');
                         return false;
                     }
                 });
