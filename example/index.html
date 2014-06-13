@@ -18,7 +18,8 @@
             jQuery(document).ready(function($) {
                 $('#page').offcanvas({
                     sidebarLeft: '#sidebarLeft',
-                    mainPage: '#page'
+                    mainPage: '#page',
+                    activeClass: 'offcanvas-active'
                 });
 
                 $('#sidebarLeft').on('open', function() {

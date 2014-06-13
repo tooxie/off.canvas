@@ -35,7 +35,6 @@
         var slideRight = function slideRight() {
         }
 
-        console.log(this);
         /* TODO
          * On right press:
          *   > Slide right.
@@ -56,7 +55,6 @@
             // Events
             mainPage.on('slideLeft', function slideLeft(ev) {
                 if ($html.hasClass(settings.activeClass)) {
-                    console.log('-- left::close');
                     // Close the left sidebar
                     if (hasSidebarLeft && lSidebar.hasClass('visible')) {
                         $html.removeClass(settings.activeClass);
@@ -64,7 +62,6 @@
                         emit(lSidebar, 'close');
                     }
                 } else {
-                    console.log('-- right::open');
                     // Open the right sidebar
                     if (hasSidebarRight && !rSidebar.hasClass('visible')) {
                         $html.addClass(settings.activeClass);
@@ -76,7 +73,6 @@
 
             mainPage.on('slideRight', function slideRight(ev) {
                 if ($html.hasClass(settings.activeClass)) {
-                    console.log('-- right::close');
                     // Close the right sidebar
                     if (hasSidebarRight && rSidebar.hasClass('visible')) {
                         $html.removeClass(settings.activeClass);
@@ -84,9 +80,8 @@
                         emit(rSidebar, 'close');
                     }
                 } else {
-                    console.log('-- left::open');
                     // Open the left sidebar
-                    if (hasSidebarRight && !lSidebar.hasClass('visible')) {
+                    if (hasSidebarLeft && !lSidebar.hasClass('visible')) {
                         $html.addClass(settings.activeClass);
                         lSidebar.addClass('visible');
                         emit(lSidebar, 'open');
