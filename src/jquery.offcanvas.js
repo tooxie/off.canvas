@@ -5,8 +5,7 @@
         var settings = $.extend({
             animated: true,
             oldPhones: true,
-            enableTouch: true,
-            enableKeys: true,
+            enableTouch: false,
             activeClass: 'offcanvas-active'
         }, options);
 
@@ -139,25 +138,6 @@
                 window.setTimeout(function() {
                     element.trigger(eventName);
                 }, 1);
-            }
-
-            if (settings.enableKeys) {
-                var LEFT = 37;
-                var RIGHT = 39;
-
-                $html.keydown(function (e) {
-                    if (e.keyCode === RIGHT) {
-                        mainPage.trigger('slideRight');
-
-                        return false;
-                    }
-
-                    if (e.keyCode === LEFT) {
-                        mainPage.trigger('slideLeft');
-
-                        return false;
-                    }
-                });
             }
 
             if (settings.enableTouch) {
