@@ -13,7 +13,6 @@
         var sections = $.extend({
             sidebarLeft: '',
             sidebarRight: '',
-            mainPage: '',
             leftBurger: '',
             rightBurger: ''
         }, options);
@@ -26,7 +25,7 @@
             var lSidebar = $(sections.sidebarLeft);
             var hasSidebarLeft = true;
         }
-        var mainPage = $(sections.mainPage);
+        var mainPage;
         var lBurger = $(sections.leftBurger);
         var rBurger = $(sections.rightBurger);
         var $html = $('html');
@@ -48,6 +47,7 @@
          */
 
         return this.each(function () {
+            mainPage = $(this);
             // Add offcanvas class for setting layout specific css
             $html.addClass('offcanvas');
 
@@ -58,6 +58,7 @@
                     if (hasSidebarLeft && lSidebar.hasClass('visible')) {
                         $html.removeClass(settings.activeClass);
                         lSidebar.removeClass('visible');
+                        mainPage.removeClass('slidRight');
                         emit(lSidebar, 'close');
                     }
                 } else {
@@ -65,6 +66,7 @@
                     if (hasSidebarRight && !rSidebar.hasClass('visible')) {
                         $html.addClass(settings.activeClass);
                         rSidebar.addClass('visible');
+                        mainPage.addClass('slidLeft');
                         emit(rSidebar, 'open');
                     }
                 }
@@ -76,6 +78,7 @@
                     if (hasSidebarRight && rSidebar.hasClass('visible')) {
                         $html.removeClass(settings.activeClass);
                         rSidebar.removeClass('visible');
+                        mainPage.removeClass('slidLeft');
                         emit(rSidebar, 'close');
                     }
                 } else {
@@ -83,6 +86,7 @@
                     if (hasSidebarLeft && !lSidebar.hasClass('visible')) {
                         $html.addClass(settings.activeClass);
                         lSidebar.addClass('visible');
+                        mainPage.addClass('slidRight');
                         emit(lSidebar, 'open');
                     }
                 }
