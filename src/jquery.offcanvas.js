@@ -30,21 +30,7 @@
         var rBurger = $(sections.rightBurger);
         var $html = $('html');
 
-        var slideRight = function slideRight() {
-        }
 
-        /* TODO
-         * On right press:
-         *   > Slide right.
-         * On left press:
-         *   > Slide left.
-         * Have events triggered on the page:
-         *   > Open/close left sidebar
-         *   > Open/close right sidebar
-         * Check if there is anything to be done:
-         *   > Open event: Is the OC already open? Then do nothing.
-         *   > Close event: Is the OC closed? Do nothing.
-         */
 
         return this.each(function () {
             mainPage = $(this);
