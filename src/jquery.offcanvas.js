@@ -30,9 +30,19 @@
         var rBurger = $(sections.rightBurger);
         var $html = $('html');
 
-
-
         return this.each(function () {
+            var clickToClose = function clickToClose(ev) {
+                ev.preventDefault();
+
+                if (lSidebar.hasClass('visible')) {
+                    mainPage.trigger('slideLeft');
+                } else if (rSidebar.hasClass('visible')) {
+                    mainPage.trigger('slideRight');
+                }
+
+                return false;
+            }
+
             mainPage = $(this);
             // Add offcanvas class for setting layout specific css
             $html.addClass('offcanvas');
@@ -45,6 +55,8 @@
                         $html.removeClass(settings.activeClass);
                         lSidebar.removeClass('visible');
                         mainPage.removeClass('slidRight');
+
+                        mainPage.off('click', clickToClose);
                         emit(lSidebar, 'close');
                     }
                 } else {
@@ -53,6 +65,8 @@
                         $html.addClass(settings.activeClass);
                         rSidebar.addClass('visible');
                         mainPage.addClass('slidLeft');
+
+                        mainPage.one('click', clickToClose);
                         emit(rSidebar, 'open');
                     }
                 }
@@ -65,6 +79,8 @@
                         $html.removeClass(settings.activeClass);
                         rSidebar.removeClass('visible');
                         mainPage.removeClass('slidLeft');
+
+                        mainPage.off('click', clickToClose);
                         emit(rSidebar, 'close');
                     }
                 } else {
@@ -73,6 +89,8 @@
                         $html.addClass(settings.activeClass);
                         lSidebar.addClass('visible');
                         mainPage.addClass('slidRight');
+
+                        mainPage.one('click', clickToClose);
                         emit(lSidebar, 'open');
                     }
                 }
