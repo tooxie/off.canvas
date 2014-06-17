@@ -56,7 +56,7 @@
                         lSidebar.removeClass('visible');
                         mainPage.removeClass('slidRight');
 
-                        mainPage.off('click', clickToClose);
+                        mainPage.off('click touchstart', clickToClose);
                         emit(lSidebar, 'close');
                     }
                 } else {
@@ -66,7 +66,7 @@
                         rSidebar.addClass('visible');
                         mainPage.addClass('slidLeft');
 
-                        mainPage.one('click', clickToClose);
+                        mainPage.one('click touchstart', clickToClose);
                         emit(rSidebar, 'open');
                     }
                 }
@@ -80,7 +80,7 @@
                         rSidebar.removeClass('visible');
                         mainPage.removeClass('slidLeft');
 
-                        mainPage.off('click', clickToClose);
+                        mainPage.off('click touchstart', clickToClose);
                         emit(rSidebar, 'close');
                     }
                 } else {
@@ -90,7 +90,7 @@
                         lSidebar.addClass('visible');
                         mainPage.addClass('slidRight');
 
-                        mainPage.one('click', clickToClose);
+                        mainPage.one('click touchstart', clickToClose);
                         emit(lSidebar, 'open');
                     }
                 }
